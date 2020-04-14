@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Jenssegers\Mongodb\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreatePasswordResetsTable extends Migration
 {
+    protected $connection = 'mongodb';
+
     /**
      * Run the migrations.
      *
@@ -13,11 +15,15 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
+        Schema::connection($this->connection)
+        ->create('password_reset_collection', function (Blueprint $collection) 
+        {
+        });
+        /*Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
-        });
+        });*/
     }
 
     /**
@@ -27,6 +33,11 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::connection($this->connection)
+        ->table('password_reset_collection', function (Blueprint $collection) 
+        {
+            $collection->drop();
+        });
+        //Schema::dropIfExists('password_resets');
     }
 }

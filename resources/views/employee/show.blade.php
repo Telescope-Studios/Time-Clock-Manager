@@ -3,12 +3,22 @@
 @section('title', 'Employee')
 
 @section('content')
+	@include('common.success')
+	<div class="card text-center mx-auto" style="width: 18rem;">
+  		<img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" src="/images/{{$employee->avatar}}" class="card-img-top rounded-circle mx-auto d-block" alt="">
+		<div class="card-body">
+			<h5 class="card-title">{{$employee->firstname}} {{$employee->lastname}}</h5>
+			<h4 class="card-text">{{App\Job::find($employee->job)->name}}</h4>
+			{!! QrCode::size(150)->generate($employee->slug); !!}
+		</div>
+	</div>
 	<div class="text-center">
-		@include('common.success')
-		<h5 class="card-title">{{$employee->firstname}}</h5>
-		<a href="/employee/{{$employee->slug}}/edit" class="btn btn-primary">Editar</a>
+		<h5> </h5>
+		<a href="/employee/{{$employee->slug}}/generateCard" class="btn btn-primary">Download</a>
+		<h5> </h5>
 		{!! Form::open(['route'=>['employee.destroy', $employee->slug], 'method' => 'DELETE']) !!}
-			{!! Form::submit('Delete', ['class' => 'btn btn-danger'])!!}
+			{!! Form::submit('Eliminar', ['class' => 'btn btn-danger'])!!}
 		{!! Form::close() !!}
 	</div>
+
 @endsection

@@ -16,3 +16,11 @@ Route::get('/', function () {
 });
 
 Route::resource('/employee', 'EmployeeController');
+
+Route::resource('/job', 'JobController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/employee/{slug}/generateCard','EmployeeController@generateCard')->name('employee.generateCard');

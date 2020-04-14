@@ -3,20 +3,34 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    protected $collection = 'user_collection';
+    protected $connection = 'mongodb';
+
     use Notifiable;
 
+    public function roles()
+    {
+        return $this->embedsMany(Role::class);
+    }
+
+    public function hasRole($role_id){
+        if($this->roles()->where('_id', $role_name)){
+            return true;
+        }
+        return false;
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'roles',
     ];
 
     /**

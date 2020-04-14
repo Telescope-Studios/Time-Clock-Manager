@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Jenssegers\Mongodb\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateJobsTable extends Migration
 {
+    protected $connection = 'mongodb';
     /**
      * Run the migrations.
      *
@@ -13,9 +14,9 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::connection($this->connection)
+        ->create('job_collection', function (Blueprint $collection) 
+        {
         });
     }
 
@@ -26,6 +27,10 @@ class CreateJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs');
+        Schema::connection($this->connection)
+        ->table('job_collection', function (Blueprint $collection) 
+        {
+            $collection->drop();
+        });
     }
 }

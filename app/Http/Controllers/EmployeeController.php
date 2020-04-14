@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Carbon;
+use App\Date;
+use App\Timestamp;
 use App\Employee;
+use App\Job;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+
+
 class EmployeeController extends Controller
 {
     /**
@@ -26,7 +32,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employee.create');
+        $jobs = Job::all();
+        return view('employee.create', compact('jobs'));
     }
 
     /**
@@ -48,9 +55,14 @@ class EmployeeController extends Controller
         $employee->lastname = $request->input('lastname');
         $employee->active = $request->input('active') == 'on' ? true : false;
         $employee->slug = $request->input('slug');
+        $employee->job = $request->input('job');
         $employee->push();
-
-        return redirect()->route('employee.index');
+/*        $date = new Date();
+        $date->name = Carbon::now()->format('Y-m-d');
+        $date->timestamps()->associate(new Timestamp(['time' => Carbon::now()->format('H-i'), 'status'=>'checkin']));
+        $employee->dates()->associate($date);
+        $employee->save();*/
+        return redirect()->route('employee.index')->with('status', 'The profile has been created successfully.');
     }
 
     /**
@@ -72,7 +84,8 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return view('employee.edit', compact('employee'));
+        $jobs = Job::all();
+        return view('employee.edit', compact('employee', 'jobs'));
     }
 
     /**
@@ -85,8 +98,8 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $validatedData = $request->validate([
-            'firstname'=>'required|max: 20',
-            'lastname'=>'required|max: 20',
+            'firstname'=>'required|alpha_spaces',
+            'lastname'=>'required|alpha_spaces',
             'slug'=>'required|unique:employee_collection,slug,'.$employee->id.',_id'
         ]);
         //return $employee->id;
@@ -99,8 +112,9 @@ class EmployeeController extends Controller
             \File::delete($file_path);
             $employee->avatar = $name;
         }
+        $employee->active = $request->input('active') == 'on' ? true : false;
         $employee->update($request->all());
-        return redirect()->route('employee.show', [$employee])->with('status', 'The profile has been updated successfully.');
+        return redirect()->route('employee.index')->with('status', 'The profile has been updated successfully.');
     }
 
     /**
@@ -115,5 +129,14 @@ class EmployeeController extends Controller
         \File::delete($file_path);
         $employee->delete();
         return redirect()->route('employee.index');
+    }
+
+    public function generateCard($slug){
+        $employee = Employee::where('slug', $slug)->get()->first();
+        //return $employee;
+        //$pdf = PDF::loadView('employee.card', compact('employee'));
+
+        //$pdf->setPaper('a4','portrait');
+        return view('employee.card', compact('employee'));
     }
 }

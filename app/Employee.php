@@ -10,7 +10,7 @@ class Employee extends Model
      //protected $primaryKey = 'id';
      protected $connection = 'mongodb';
 
-     protected $fillable = ['firstname', 'lastname', 'slug', 'active', 'avatar'];
+     protected $fillable = ['firstname', 'lastname', 'slug', 'active', 'avatar', 'dates', 'job'];
      //protected $dates = ['created_at', 'updated_at'];
 
     public function dates()
