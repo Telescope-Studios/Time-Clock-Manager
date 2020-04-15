@@ -23,5 +23,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('/stamp', 'StampTimeController');
+
+
 Route::get('/employee/{slug}/generateCard','EmployeeController@generateCard')->name('employee.generateCard');
 Route::get('/employee/{slug}/showTimesheet','EmployeeController@showTimesheet')->name('employee.showTimesheet');
+

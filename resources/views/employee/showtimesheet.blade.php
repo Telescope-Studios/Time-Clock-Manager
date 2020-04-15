@@ -12,6 +12,7 @@
 			    <tr>
 			      <th scope="col">Date</th>
 			      <th scope="col">Job</th>
+			      <th scope="col">Status</th>
 			      <th scope="col">Total Hours</th>
 			      <th scope="col">Total Earnings</th>
 			    </tr>
@@ -21,6 +22,7 @@
 					<tr>
 				      <td>{{$date->name}}</td>
 				      <td>{{$date->job->name}}</td>
+				      <td>{{$date->complete ? 'Completed' : 'Pending'}}</td>
 				      <td></td>
 				      <td></td>
 				    </tr>
@@ -30,6 +32,7 @@
 			    <tr>
 			      <th scope="col">Date</th>
 			      <th scope="col">Job</th>
+			      <th scope="col">Status</th>
 			      <th scope="col">Total Hours</th>
 			      <th scope="col">Total Earnings</th>
 			    </tr>

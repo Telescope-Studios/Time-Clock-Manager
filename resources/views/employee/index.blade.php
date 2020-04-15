@@ -58,14 +58,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/popper.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-	<style>
-		.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
-    		color: white !important;
-		    border: 0px;
-		    background-color: #2980B9!important;
-		    background: white !important;
-		}
-	</style>
 	<script>
     	$('#mydatatable').DataTable();
 	</script>
