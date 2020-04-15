@@ -18,9 +18,33 @@ class User extends Authenticatable
         return $this->embedsMany(Role::class);
     }
 
-    public function hasRole($role_id){
-        if($this->roles()->where('_id', $role_name)){
+    public function authorizeRoles($roles){
+        if($this->hasAnyRoles($roles)){
             return true;
+        }
+        abort(401, 'This action is unauthorized.');
+    }
+
+    public function hasAnyRoles($roles){
+        if(is_array($roles)){
+            foreach ($roles as $role) {
+                if($this->hasRole($role)){
+                    return true;
+                }
+            }
+        }else{
+            if($this->hasRole($roles)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasRole($role){
+        foreach ($this->roles() as $rolex) {
+            if($rolex->name == $role){
+                return true;
+            }
         }
         return false;
     }

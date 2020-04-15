@@ -37,7 +37,7 @@
 				      <td>{{$employee->firstname}}</td>
 				      <td>{{$employee->lastname}}</td>
 				      <td>{{$employee->slug}}</td>
-				      <td>{{App\Job::find($employee->job)->name ?? null}}</td><!--need to fix this properly-->
+				      <td>{{App\Job::find($employee->job)->name ?? null}}</td><!--need to fix this properly maybe on job delete v:-->
 				    </tr>
 			  	@endforeach
 			  </tbody>

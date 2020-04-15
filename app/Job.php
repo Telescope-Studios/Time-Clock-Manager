@@ -11,4 +11,9 @@ class Job extends Model
     protected $connection = 'mongodb';
 
     protected $fillable = ['name', 'description', 'rate'];
+
+    public function date()
+    {
+        return $this->belongsTo(Date::class);
+    }
 }

@@ -7,6 +7,8 @@ use App\Date;
 use App\Timestamp;
 use App\Employee;
 use App\Job;
+use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
@@ -44,6 +46,7 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
+
         $employee = new Employee();
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
@@ -57,8 +60,21 @@ class EmployeeController extends Controller
         $employee->slug = $request->input('slug');
         $employee->job = $request->input('job');
         $employee->push();
-/*        $date = new Date();
+
+        /*$user = new User();
+        $user->name = 'Admin';
+        $user->email = 'admin@gmail.com';
+        $user->password = bcrypt('qwerty');
+        $user->push();
+        $user->roles()->associate(Role::find('5e9580891bb431092867b6f3'));
+        $user->save();*/
+
+
+        /*$date = new Date();
         $date->name = Carbon::now()->format('Y-m-d');
+        $job = Job::find($employee->job);
+        $date->job()->associate($job);
+        $date->complete = false;
         $date->timestamps()->associate(new Timestamp(['time' => Carbon::now()->format('H-i'), 'status'=>'checkin']));
         $employee->dates()->associate($date);
         $employee->save();*/
@@ -132,11 +148,21 @@ class EmployeeController extends Controller
     }
 
     public function generateCard($slug){
+        if($request->user() == null){
+            abort(401);
+        }
+        $request->user()->authorizeRoles(['Admin']);
         $employee = Employee::where('slug', $slug)->get()->first();
         //return $employee;
         //$pdf = PDF::loadView('employee.card', compact('employee'));
 
         //$pdf->setPaper('a4','portrait');
         return view('employee.card', compact('employee'));
+    }
+
+    public function showTimesheet($slug){
+        $employee = Employee::where('slug', $slug)->get()->first();
+        //return $employee;
+        return view('employee.showtimesheet', compact('employee'));
     }
 }

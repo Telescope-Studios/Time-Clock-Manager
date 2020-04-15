@@ -13,6 +13,10 @@ class StoreEmployeeRequest extends FormRequest
      */
     public function authorize()
     {
+        /*if($request->user() == null){
+            abort(401);
+        }
+        $request->user()->authorizeRoles(['Admin']);*/
         return true;
     }
 
