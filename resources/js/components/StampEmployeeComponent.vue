@@ -10,14 +10,15 @@
       </div>
       <div class="modal-body">
       	<form @submit.prevent="stampTime">
-	        <div class="form-group">
-			    <label>Name</label>
-			    <h5>NAMENAMENAME</h5>
-		  	</div>
-		  	<div class="form-group">
-			    <label>Slug</label>
-          <input type="text" class="form-control" v-model="slug">
-		  	</div>
+	        <div class="container">
+            <div class="card text-center" style="width: 18rem;">
+              <img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" v-bind:src="'/images/' + employee.avatar" class="card-img-top rounded-circle mx-auto d-block" alt="">
+              <div class="card-body">
+                <h4 class="card-title">{{employee.firstname}} {{employee.lastname}}</h4>
+                <h6 class="card-text">{{employee.slug}}</h6>
+              </div>
+            </div>
+          </div>
 		  	<button type="submit" class="btn btn-primary">Stamp</button>
 	  	</form>
       </div>
@@ -26,28 +27,29 @@
 </div>
 </template>
 <script>
+  import EventBus from '../eventbus'
+
     export default{
       data(){
         return{
-          slug: null
+          employee: null
         }
       },
       created(){
-
+        EventBus.$on('employee-stamp', data=>{
+          this.employee = data;
+        })
       },
       methods: {
         stampTime: function(){
           axios.post('/stamp', {
-            slug: this.slug,
+            slug: this.employee.slug,
             scan: false
           })
           .then(function(res){
-            console.log(res.data.employee)
             $('#stampEmployee').modal('hide')
           })
           .catch(function(err){
-            console.log(err)
-            $('#stampEmployee').modal('hide')
           });
         }
       }
