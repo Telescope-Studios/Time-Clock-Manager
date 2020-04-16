@@ -1,5 +1,8 @@
 <template>
   <div>
+    <p class="decode-result">Last result: <b>{{ result }}</b></p>
+    <p class="">Name: <b>{{ employee.firstname }}</b></p>
+
     <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit">
       <div v-if="validationSuccess" class="validation-success">
         Valid Employee
@@ -28,7 +31,8 @@ export default {
     return {
       isValid: undefined,
       camera: 'auto',
-      result: null
+      result: null,
+      employee: [],
     }
   },
 
@@ -70,15 +74,16 @@ export default {
           slug: this.result,
           scan: true
         }).then((res) => {
+          this.employee = res.data.employee
           EventBus.$emit('employee-stamp', res.data.employee)
           this.isValid = true
-          $('#stampEmployee').modal('show')
         }).catch((error) => {
           console.log(error)
           this.isValid = false
         })
+
       // some more delay, so users have time to read the message
-      await this.timeout(3000)
+      await this.timeout(2000)
 
       this.turnCameraOn()
     },

@@ -1939,7 +1939,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _eventbus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../eventbus */ "./resources/js/eventbus.js");
 //
 //
 //
@@ -1967,31 +1966,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      employee: null
+      slug: null
     };
   },
-  created: function created() {
-    var _this = this;
-
-    _eventbus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('employee-stamp', function (data) {
-      _this.employee = data;
-    });
-  },
+  created: function created() {},
   methods: {
     stampTime: function stampTime() {
       axios.post('/stamp', {
-        slug: this.employee.slug,
+        slug: this.slug,
         scan: false
       }).then(function (res) {
         console.log(res.data.employee);
         $('#stampEmployee').modal('hide');
       })["catch"](function (err) {
         console.log(err);
+        $('#stampEmployee').modal('hide');
       });
     }
   }
@@ -2036,6 +2028,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2046,7 +2041,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       isValid: undefined,
       camera: 'auto',
-      result: null
+      result: null,
+      employee: []
     };
   },
   computed: {
@@ -2084,16 +2080,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   slug: _this.result,
                   scan: true
                 }).then(function (res) {
+                  _this.employee = res.data.employee;
                   _eventbus__WEBPACK_IMPORTED_MODULE_2__["default"].$emit('employee-stamp', res.data.employee);
                   _this.isValid = true;
-                  $('#stampEmployee').modal('show');
                 })["catch"](function (error) {
                   console.log(error);
                   _this.isValid = false;
                 }); // some more delay, so users have time to read the message
 
                 _context.next = 5;
-                return _this.timeout(3000);
+                return _this.timeout(2000);
 
               case 5:
                 _this.turnCameraOn();
@@ -39364,44 +39360,32 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "container" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "card text-center",
-                      staticStyle: { width: "18rem" }
-                    },
-                    [
-                      _c("img", {
-                        staticClass:
-                          "card-img-top rounded-circle mx-auto d-block",
-                        staticStyle: {
-                          height: "200px",
-                          width: "200px",
-                          "background-color": "#EFEFEF",
-                          margin: "20px"
-                        },
-                        attrs: {
-                          src: "/images/" + _vm.employee.avatar,
-                          alt: ""
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Slug")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.slug,
+                        expression: "slug"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.slug },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h4", { staticClass: "card-title" }, [
-                          _vm._v(
-                            _vm._s(_vm.employee.firstname) +
-                              " " +
-                              _vm._s(_vm.employee.lastname)
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(_vm.employee.slug))
-                        ])
-                      ])
-                    ]
-                  )
+                        _vm.slug = $event.target.value
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c(
@@ -39442,6 +39426,16 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("h5", [_vm._v("NAMENAMENAME")])
+    ])
   }
 ]
 render._withStripped = true
@@ -39468,6 +39462,16 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("p", { staticClass: "decode-result" }, [
+        _vm._v("Last result: "),
+        _c("b", [_vm._v(_vm._s(_vm.result))])
+      ]),
+      _vm._v(" "),
+      _c("p", {}, [
+        _vm._v("Name: "),
+        _c("b", [_vm._v(_vm._s(_vm.employee.firstname))])
+      ]),
+      _vm._v(" "),
       _c(
         "qrcode-stream",
         {

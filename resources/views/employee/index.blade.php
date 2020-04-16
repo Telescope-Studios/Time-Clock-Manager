@@ -3,7 +3,7 @@
 @section('title', 'Test')
 
 @section('content')
-	<h1 style="margin-top: 50px;">List of Employees</h1>
+	<h1 style="margin-top: 50px;">List of Employees - {{\Carbon\Carbon::now()->format('H:i')}}</h1>
 	@include('common.success')
 	<div class="mb-3 mt-3">
 		<div class="table-responsive-sm">
