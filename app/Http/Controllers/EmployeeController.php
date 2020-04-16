@@ -23,12 +23,6 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //return json_encode($request->user()->roles());
-        /*if($request->user() == null){
-            abort(401);
-        }
-        $request->user()->authorizeRoles(['Admin']);*/
-
         $employees = Employee::all();
         return view('employee.index', compact('employees'));
     }
@@ -154,6 +148,10 @@ class EmployeeController extends Controller
     }
 
     public function generateCard($slug){
+        if($request->user() == null){
+            abort(401);
+        }
+        $request->user()->authorizeRoles(['Admin']);
         $employee = Employee::where('slug', $slug)->get()->first();
         //return $employee;
         //$pdf = PDF::loadView('employee.card', compact('employee'));
