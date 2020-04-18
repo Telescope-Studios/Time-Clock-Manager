@@ -28,7 +28,7 @@ class StampTimeController extends Controller
     		}
     		$date = new Date();
         	$date->name = Carbon::now()->format('Y-m-d');
-	       	$job = Job::find($employee->job);
+	       	$job = Job::find($employee->job->id);
 	        $date->job()->associate($job);
 	        $date->complete = false;
 	        $date->timestamps()->associate(new Timestamp(['time' => Carbon::now()->format('H-i'), 'status'=>'checkin']));

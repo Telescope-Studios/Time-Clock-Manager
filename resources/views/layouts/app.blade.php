@@ -78,5 +78,8 @@
             </div>
         </main>
     </div>
+
+    <!-- App scripts -->
+    @stack('scripts')
 </body>
 </html>

@@ -12,85 +12,32 @@
 </div>
 <div class="form-group"> 
 		{!! Form::label('avatar', 'Avatar') !!}
-		{!! Form::file('avatar') !!}
+		<div class="custom-file">
+  			{!! Form::file('avatar', ['class'=>'custom-file-input', 'accept'=>'image/*']) !!}<!--This is broken af v: label not changing v:-->
+  			<label class="custom-file-label" for="avatar">Choose file</label>
+		</div>
 </div>
 <div class="form-group"> 
 		{!! Form::label('active', 'Active') !!}
-		{!! Form::checkbox('active', null, ['class' => 'form-control ']) !!}
-		<!-- Rounded switch -->
-
-		{{-- <label class="switch">
-		  	{!! Form::checkbox('active', null, ['class' => 'form-control ']) !!}
-		  	<span class="slider round"></span>
-		</label> --}}
+		{{-- {!! Form::checkbox('active', null, $employee->active, ['class' => 'form-control ']) !!} --}}
+		<div class="custom-control custom-switch">
+  			{!! Form::checkbox('active', null, $employee->active ?? null, ['class' => 'form-control custom-control-input', 'style'=>'width: 30px; height: 30px;']) !!}
+  			<label class="custom-control-label" for="active"></label>
+		</div>
 </div>
 
 <div class="form-group"> 
 		{!! Form::label('job', 'Job') !!}
-		{!! Form::selectJob("job", null, $jobs, ["class"=>"form-control"]) !!}
+		{!! Form::selectJob("job", $employee->job->id ?? null, $jobs, ["class"=>"form-control"]) !!}
 </div>
 
-<style>
-	/* The switch - the box around the slider */
-	.switch {
-		position: relative;
-		display: inline-block;
-		width: 60px;
-		height: 34px;
-	}
-
-	/* Hide default HTML checkbox */
-	.switch input {
-		opacity: 0;
-		width: 0;
-		height: 0;
-	}
-
-	/* The slider */
-	.slider {
-		position: absolute;
-		cursor: pointer;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #ccc;
-		-webkit-transition: .4s;
-		transition: .4s;
-	}
-
-	.slider:before {
-		position: absolute;
-		content: "";
-		height: 26px;
-		width: 26px;
-		left: 4px;
-		bottom: 4px;
-		background-color: white;
-		-webkit-transition: .4s;
-		transition: .4s;
-	}
-
-	input:checked + .slider {
-		background-color: #2196F3;
-	}
-
-	input:focus + .slider {
-	  	box-shadow: 0 0 1px #2196F3;
-	}
-
-	input:checked + .slider:before {
-		-webkit-transform: translateX(26px);
-		-ms-transform: translateX(26px);
-		transform: translateX(26px);
-	}
-
-	/* Rounded sliders */
-	.slider.round {
-		border-radius: 34px;
-	}
-
-	.slider.round:before {
-		border-radius: 50%;
-	}
-</style>
+@push('scripts')
+	<script type="text/javascript">
+		document.querySelector('#avatar').addEventListener('change',function(e){
+  			var fileName = document.getElementById("avatar").files[0].name;
+  			var nextSibling = e.target.nextElementSibling;
+  			nextSibling.innerText = fileName;
+  			console.log(fileName);
+		});
+	</script>
+@endpush

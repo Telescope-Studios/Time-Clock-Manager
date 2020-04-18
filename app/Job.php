@@ -16,4 +16,9 @@ class Job extends Model
     {
         return $this->belongsTo(Date::class);
     }
+
+    public function job()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

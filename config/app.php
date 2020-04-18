@@ -181,6 +181,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*
@@ -235,6 +236,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

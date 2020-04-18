@@ -12,6 +12,10 @@ import Vue from 'vue'
 import VueQrcodeReader from 'vue-qrcode-reader'
 import VueQrCodeReaderPauseValidateComponent from './components/vue-qrcode-reader-pause-validate.vue'
 import StampEmployeeComponent from './components/StampEmployeeComponent.vue'
+import JobTableComponent from './components/JobTableComponent.vue'
+import EmployeeTableComponent from './components/EmployeeTableComponent.vue'
+import QRScannerComponentFallback from './components/QRScannerComponentFallback.vue'
+import TimesheetComponent from './components/TimesheetComponent.vue';
 
 Vue.use(VueQrcodeReader);
 /**
@@ -26,7 +30,12 @@ Vue.use(VueQrcodeReader);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('vue-qr-code-reader-pv', VueQrCodeReaderPauseValidateComponent);
+Vue.component('qr-scanner-component-fallback', QRScannerComponentFallback);
 Vue.component('stamp-employee-component', StampEmployeeComponent);
+
+Vue.component('employee-table-component', EmployeeTableComponent);
+Vue.component('job-table-component', JobTableComponent);
+Vue.component('TimesheetComponent', TimesheetComponent);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

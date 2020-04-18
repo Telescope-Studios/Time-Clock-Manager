@@ -18,6 +18,11 @@ class Employee extends Model
         return $this->embedsMany(Date::class);
     }
 
+    public function job()
+    {
+        return $this->embedsOne(Job::class);
+    }
+
      public function getRouteKeyName(){
     	return 'slug';
     }

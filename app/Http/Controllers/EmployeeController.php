@@ -12,6 +12,7 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use Yajra\Datatables\Datatables;
 
 
 class EmployeeController extends Controller
@@ -58,8 +59,9 @@ class EmployeeController extends Controller
         $employee->lastname = $request->input('lastname');
         $employee->active = $request->input('active') == 'on' ? true : false;
         $employee->slug = $request->input('slug');
-        $employee->job = $request->input('job');
         $employee->push();
+        $employee->job()->associate(Job::find($request->input('job')));
+        $employee->save();
 
         /*$user = new User();
         $user->name = 'Admin';
@@ -120,16 +122,19 @@ class EmployeeController extends Controller
         ]);
         //return $employee->id;
         //Todo: This is not validating properly
+        $employee->active = $request->input('active') == 'on';
+        $old_avatar = $employee->avatar;
+        $employee->update($request->all());
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/images/', $name);
-            $file_path = public_path().'/images/'.$employee->avatar;
+            $file_path = public_path().'/images/'.$old_avatar;
             \File::delete($file_path);
             $employee->avatar = $name;
+            $file->move(public_path().'/images/', $name);
         }
-        $employee->active = $request->input('active') == 'on' ? true : false;
-        $employee->update($request->all());
+        $employee->job()->associate(Job::find($request->input('job')));
+        $employee->save();
         return redirect()->route('employee.index')->with('status', 'The profile has been updated successfully.');
     }
 
@@ -147,22 +152,11 @@ class EmployeeController extends Controller
         return redirect()->route('employee.index');
     }
 
-    public function generateCard($slug){
-        if($request->user() == null){
-            abort(401);
-        }
-        $request->user()->authorizeRoles(['Admin']);
-        $employee = Employee::where('slug', $slug)->get()->first();
-        //return $employee;
-        //$pdf = PDF::loadView('employee.card', compact('employee'));
-
-        //$pdf->setPaper('a4','portrait');
+    public function generateCard(Employee $employee){
         return view('employee.card', compact('employee'));
     }
 
-    public function showTimesheet($slug){
-        $employee = Employee::where('slug', $slug)->get()->first();
-        //return $employee;
+    public function showTimesheet(Employee $employee){
         return view('employee.showtimesheet', compact('employee'));
     }
 }
