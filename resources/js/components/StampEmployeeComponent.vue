@@ -12,7 +12,7 @@
                     <div class="container mx-auto text-center">
                         <form @submit.prevent="stampTime">
                             <div class="form-group">
-                                <div class="card text-center mx-auto" style="width: 18rem;">
+                                <div class="card text-center mx-auto">
                                     <img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" v-bind:src="'/images/' + employee.avatar" class="card-img-top rounded-circle mx-auto d-block" alt="">
                                     <div class="card-body">
                                         <h4 class="card-title">{{employee.firstname}} {{employee.lastname}}</h4>

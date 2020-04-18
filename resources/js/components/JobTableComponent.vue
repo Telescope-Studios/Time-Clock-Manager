@@ -14,10 +14,10 @@
                 <td>{{ job.description}}</td>
                 <td>${{ Number(job.rate).toFixed(2).toLocaleString() }}</td>
                 <th scope="row">
-                    <a v-bind:href="'/job/' + job.id" title="View" data-toggle="tooltip"><!---View-->
+                    <a v-bind:href="'/job/' + job._id" title="View" data-toggle="tooltip"><!---View-->
                         <i class="far fa-eye"></i>
                     </a>
-                    <a v-bind:href="'/job/' + job.id + '/edit'" title="Edit" data-toggle="tooltip"><!---Edit-->
+                    <a v-bind:href="'/job/' + job._id + '/edit'" title="Edit" data-toggle="tooltip"><!---Edit-->
                         <i class="fas fa-edit"></i>
                     </a>
                 </th>

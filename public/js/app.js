@@ -55226,7 +55226,7 @@ var render = function() {
                 "a",
                 {
                   attrs: {
-                    href: "/job/" + job.id,
+                    href: "/job/" + job._id,
                     title: "View",
                     "data-toggle": "tooltip"
                   }
@@ -55238,7 +55238,7 @@ var render = function() {
                 "a",
                 {
                   attrs: {
-                    href: "/job/" + job.id + "/edit",
+                    href: "/job/" + job._id + "/edit",
                     title: "Edit",
                     "data-toggle": "tooltip"
                   }
@@ -55401,47 +55401,40 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "card text-center mx-auto",
-                        staticStyle: { width: "18rem" }
-                      },
-                      [
-                        _c("img", {
-                          staticClass:
-                            "card-img-top rounded-circle mx-auto d-block",
-                          staticStyle: {
-                            height: "200px",
-                            width: "200px",
-                            "background-color": "#EFEFEF",
-                            margin: "20px"
-                          },
-                          attrs: {
-                            src: "/images/" + _vm.employee.avatar,
-                            alt: ""
-                          }
-                        }),
+                    _c("div", { staticClass: "card text-center mx-auto" }, [
+                      _c("img", {
+                        staticClass:
+                          "card-img-top rounded-circle mx-auto d-block",
+                        staticStyle: {
+                          height: "200px",
+                          width: "200px",
+                          "background-color": "#EFEFEF",
+                          margin: "20px"
+                        },
+                        attrs: {
+                          src: "/images/" + _vm.employee.avatar,
+                          alt: ""
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v(
+                            _vm._s(_vm.employee.firstname) +
+                              " " +
+                              _vm._s(_vm.employee.lastname)
+                          )
+                        ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("h4", { staticClass: "card-title" }, [
-                            _vm._v(
-                              _vm._s(_vm.employee.firstname) +
-                                " " +
-                                _vm._s(_vm.employee.lastname)
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("h5", { staticClass: "card-text" }, [
-                            _vm._v(_vm._s(_vm.employee.job.name))
-                          ]),
-                          _vm._v(" "),
-                          _c("h6", { staticClass: "card-text" }, [
-                            _vm._v(_vm._s(_vm.employee.slug))
-                          ])
+                        _c("h5", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(_vm.employee.job.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(_vm.employee.slug))
                         ])
-                      ]
-                    )
+                      ])
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
