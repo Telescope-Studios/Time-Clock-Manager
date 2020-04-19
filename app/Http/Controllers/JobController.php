@@ -13,8 +13,9 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $this->checkAuthorization($request);
         $jobs = Job::all();
         return view('job.index', compact('jobs'));
     }
@@ -24,8 +25,9 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->checkAuthorization($request);
         return view('job.create');
     }
 
@@ -37,6 +39,7 @@ class JobController extends Controller
      */
     public function store(JobRequest $request)//fix the filter
     {
+        $this->checkAuthorization($request);
         $job = new Job();
         $job->name = $request->input('name');
         $job->description = $request->input('description');
@@ -52,8 +55,9 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show(Job $job, Request $request)
     {
+        $this->checkAuthorization($request);
         return view('job.show', compact('job'));
     }
 
@@ -63,8 +67,9 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(Job $job)
+    public function edit(Job $job, Request $request)
     {
+        $this->checkAuthorization($request);
         return view('job.edit', compact('job'));
     }
 
@@ -77,6 +82,7 @@ class JobController extends Controller
      */
     public function update(JobRequest $request, Job $job)
     {
+        $this->checkAuthorization($request);
         $job->update($request->all());
         return redirect()->route('job.index')->with('status', 'The job has been updated successfully.');    }
 
@@ -86,9 +92,18 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy(Job $job, Request $request)
     {
+        $this->checkAuthorization($request);
         $job->delete();
         return redirect()->route('job.index');
+    }
+
+    public function checkAuthorization(Request $request){
+        if($request->user() != null){
+            $request->user()->authorizeRoles(['Admin']);
+        }else{
+            abort(401);
+        }
     }
 }

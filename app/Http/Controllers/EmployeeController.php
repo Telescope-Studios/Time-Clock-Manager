@@ -22,8 +22,9 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $this->checkAuthorization($request);
         $employees = Employee::all();
         return view('employee.index', compact('employees'));
     }
@@ -33,8 +34,9 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->checkAuthorization($request);
         $jobs = Job::all();
         return view('employee.create', compact('jobs'));
     }
@@ -47,7 +49,7 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-
+        $this->checkAuthorization($request);
         $employee = new Employee();
         if($request->hasFile('avatar')){
             $file = $request->file('avatar');
@@ -89,8 +91,9 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show(Employee $employee, Request $request)
     {
+        $this->checkAuthorization($request);
         return view('employee.show', compact('employee'));
     }
 
@@ -100,8 +103,9 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Employee $employee, Request $request)
     {
+        $this->checkAuthorization($request);
         $jobs = Job::all();
         return view('employee.edit', compact('employee', 'jobs'));
     }
@@ -115,6 +119,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
+        $this->checkAuthorization($request);
         $validatedData = $request->validate([
             'firstname'=>'required|alpha_spaces',
             'lastname'=>'required|alpha_spaces',
@@ -144,19 +149,32 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Employee $employee, Request $request)
     {
+        $this->checkAuthorization($request);
         $file_path = public_path().'/images/'.$employee->avatar;
         \File::delete($file_path);
         $employee->delete();
         return redirect()->route('employee.index');
     }
 
-    public function generateCard(Employee $employee){
+    public function generateCard(Employee $employee, Request $request)
+    {
+        $this->checkAuthorization($request);
         return view('employee.card', compact('employee'));
     }
 
-    public function showTimesheet(Employee $employee){
+    public function showTimesheet(Employee $employee, Request $request)
+    {
+        $this->checkAuthorization($request);
         return view('employee.showtimesheet', compact('employee'));
+    }
+
+    public function checkAuthorization(Request $request){
+        if($request->user() != null){
+            $request->user()->authorizeRoles(['Admin']);
+        }else{
+            abort(401);
+        }
     }
 }

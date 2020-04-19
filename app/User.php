@@ -27,7 +27,7 @@ class User extends Authenticatable
 
     public function hasAnyRoles($roles){
         if(is_array($roles)){
-            foreach ($roles as $role) {
+            foreach($roles as $role) {
                 if($this->hasRole($role)){
                     return true;
                 }
@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
 
     public function hasRole($role){
-        foreach ($this->roles() as $rolex) {
+        foreach ($this->roles as $rolex) {
             if($rolex->name == $role){
                 return true;
             }

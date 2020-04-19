@@ -23,7 +23,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/stamp', 'StampTimeController');
+Route::get('/stamp', 'StampTimeController@index')->name('stamp.index');
+Route::post('/stamp', 'StampTimeController@store')->name('stamp.store');
 
 
 Route::get('/employee/{employee}/generateCard','EmployeeController@generateCard')->name('employee.generateCard');

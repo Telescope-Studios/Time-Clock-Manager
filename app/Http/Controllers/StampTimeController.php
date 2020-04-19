@@ -11,11 +11,13 @@ use App\Timestamp;
 
 class StampTimeController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $this->checkAuthorization($request);
     	return view('stamp.index');
     }
 
     public function store(Request $request){
+        $this->checkAuthorization($request);
     	if($request->ajax()){
     		$scan = $request->input('scan');
 
@@ -37,5 +39,13 @@ class StampTimeController extends Controller
 
 	        return response()->json(['message'=>'Time stamped successfully.', 'employee'=>$employee], 200);
     	}
+    }
+
+    public function checkAuthorization(Request $request){
+        if($request->user() != null){
+            $request->user()->authorizeRoles(['Admin']);
+        }else{
+            abort(401);
+        }
     }
 }
