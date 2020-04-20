@@ -164,12 +164,6 @@ class EmployeeController extends Controller
         return view('employee.card', compact('employee'));
     }
 
-    public function showTimesheet(Employee $employee, Request $request)
-    {
-        $this->checkAuthorization($request);
-        return view('employee.showtimesheet', compact('employee'));
-    }
-
     public function checkAuthorization(Request $request){
         if($request->user() != null){
             $request->user()->authorizeRoles(['Admin']);

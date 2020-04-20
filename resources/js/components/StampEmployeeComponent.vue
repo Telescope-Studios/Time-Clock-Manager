@@ -9,10 +9,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="container mx-auto text-center">
+                    <div class="container text-center">
                         <form @submit.prevent="stampTime">
                             <div class="form-group">
-                                <div class="card text-center mx-auto">
+                                <div class="card text-center">
                                     <img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" v-bind:src="'/images/' + employee.avatar" class="card-img-top rounded-circle mx-auto d-block" alt="">
                                     <div class="card-body">
                                         <h4 class="card-title">{{employee.firstname}} {{employee.lastname}}</h4>
@@ -35,7 +35,7 @@
     export default{
       data(){
         return{
-          employee: null
+          employee: {avatar:'', firstname:'', lastname:'', slug:'', job:{name:''}}// this fixes double scan 
         }
       },
       created(){

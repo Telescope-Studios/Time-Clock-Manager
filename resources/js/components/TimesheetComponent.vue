@@ -1,5 +1,5 @@
 <template>
-	<table class="table table-striped table-bordered" id="mydatatable3" style="width: 100%">
+	<table class="table table-striped table-bordered" id="employee-timesheet-table" style="width: 100%">
 		<thead>
 			<tr>
 				<th scope="col">Date</th>
@@ -46,7 +46,7 @@
         methods:{
             myTable(){
                 $(function(){
-                    $('#employee-table').DataTable();
+                    $('#employee-timesheet-table').DataTable();
                 });
             },
 

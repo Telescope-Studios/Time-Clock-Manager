@@ -32,12 +32,14 @@
 </div>
 
 @push('scripts')
-	<script type="text/javascript">
-		document.querySelector('#avatar').addEventListener('change',function(e){
-  			var fileName = document.getElementById("avatar").files[0].name;
-  			var nextSibling = e.target.nextElementSibling;
-  			nextSibling.innerText = fileName;
-  			console.log(fileName);
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		    document.querySelector('#avatar').addEventListener('change',function(e){
+	  			var fileName = document.getElementById("avatar").files[0].name;
+	  			var nextSibling = e.target.nextElementSibling;
+	  			nextSibling.innerText = fileName;
+	  			console.log(fileName);
+			});
 		});
 	</script>
 @endpush

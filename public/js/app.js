@@ -1962,9 +1962,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['employeesjson'],
@@ -2251,7 +2248,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      employee: null
+      employee: {
+        avatar: '',
+        firstname: '',
+        lastname: '',
+        slug: '',
+        job: {
+          name: ''
+        }
+      } // this fixes double scan 
+
     };
   },
   created: function created() {
@@ -2334,7 +2340,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     myTable: function myTable() {
       $(function () {
-        $('#employee-table').DataTable();
+        $('#employee-timesheet-table').DataTable();
       });
     },
     getEmployee: function getEmployee() {
@@ -55106,18 +55112,6 @@ var render = function() {
                   }
                 },
                 [_c("i", { staticClass: "far fa-eye" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "/employee/" + employee.slug + "/edit",
-                    title: "Edit",
-                    "data-toggle": "tooltip"
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-edit" })]
               )
             ])
           ])
@@ -55388,7 +55382,7 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
-            _c("div", { staticClass: "container mx-auto text-center" }, [
+            _c("div", { staticClass: "container text-center" }, [
               _c(
                 "form",
                 {
@@ -55401,7 +55395,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("div", { staticClass: "card text-center mx-auto" }, [
+                    _c("div", { staticClass: "card text-center" }, [
                       _c("img", {
                         staticClass:
                           "card-img-top rounded-circle mx-auto d-block",
@@ -55507,7 +55501,7 @@ var render = function() {
     {
       staticClass: "table table-striped table-bordered",
       staticStyle: { width: "100%" },
-      attrs: { id: "mydatatable3" }
+      attrs: { id: "employee-timesheet-table" }
     },
     [
       _vm._m(0),

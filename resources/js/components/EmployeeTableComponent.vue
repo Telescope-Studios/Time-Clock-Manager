@@ -22,9 +22,6 @@
                     <a v-bind:href="'/employee/' + employee.slug" title="View" data-toggle="tooltip"><!---View-->
                     <i class="far fa-eye"></i>
                     </a>
-                    <a v-bind:href="'/employee/' + employee.slug + '/edit'" title="Edit" data-toggle="tooltip"><!---Edit-->
-                    <i class="fas fa-edit"></i>
-                    </a>
                 </th>
             </tr>
         </tbody>

@@ -4,24 +4,51 @@
 
 @section('content')
 	@include('common.success')
-	<div class="card text-center mx-auto" style="width: 18rem;">
-  		<img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" src="/images/{{$employee->avatar}}" class="card-img-top rounded-circle mx-auto d-block" alt="">
-		<div class="card-body">
-			<h4 class="card-title">{{$employee->firstname}} {{$employee->lastname}}</h4>
-			<h5 class="card-text">{{$employee->job->name}}</h5>
-			{!! QrCode::size(150)->generate($employee->slug); !!}
-			<h6 class="card-text">{{$employee->slug}}</h6>
+	<div class="d-flex">
+		<div class="card-img-top d-flex align-items-center">
+			<div>
+				<img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" src="/images/{{$employee->avatar}}" class="rounded-circle img-responsive" alt="">
+			</div>
+			<div class="d-block">
+				<h2 class="card-title">{{$employee->firstname}} {{$employee->lastname}}</h4>
+				<h5 class="card-text">{{$employee->job->name}}</h5>
+				<h6 class="card-text">{{$employee->active == true? 'Active' : 'Inactive'}}</h6>
+			</div>
+			<div class="ml-auto">
+				<div class="dropdown show">
+				  	<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
+
+				  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    <a href="{{ route('employee.edit', $employee->slug) }}" class="dropdown-item">Edit</a>
+					    <a href="{{ route('employee.generateCard', $employee->slug) }}" class="dropdown-item">Generate Card</a>
+					    <a class="dropdown-item" data-toggle="modal" data-target="#deleteWarningModal">Delete</a>
+				  	</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="text-center">
-		<h5> </h5>
-		<a href="/employee/{{$employee->slug}}/generateCard" class="btn btn-primary">Download</a>
-		<h5> </h5>
-		<a href="/employee/{{$employee->slug}}/showTimesheet" class="btn btn-primary">View Timesheet</a>
-		<h5> </h5>
-		{!! Form::open(['route'=>['employee.destroy', $employee->slug], 'method' => 'DELETE']) !!}
-			{!! Form::submit('Eliminar', ['class' => 'btn btn-danger'])!!}
-		{!! Form::close() !!}
+	<h1 style="margin-top: 50px;">Timesheet</h1>
+	<div class="table-responsive-sm">
+		<timesheet-component employeejson="{{$employee}}"></timesheet-component>
 	</div>
-
+	<div class="modal fade" id="deleteWarningModal" tabindex="-1" role="dialog" aria-labelledby="deleteWarningModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <h5 class="modal-title" id="deleteWarningModalLabel">Confirmation</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		    </div>
+	      	<div class="modal-body">
+	        	Are you sure you want to delete this employee?
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+	        	{!! Form::open(['route'=>['employee.destroy', $employee->slug], 'method' => 'DELETE']) !!}
+					{!! Form::submit('Delete', ['class' => 'btn btn-danger'])!!}
+				{!! Form::close() !!}
+	      	</div>
+	    </div>
+	</div>
 @endsection

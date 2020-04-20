@@ -28,4 +28,3 @@ Route::post('/stamp', 'StampTimeController@store')->name('stamp.store');
 
 
 Route::get('/employee/{employee}/generateCard','EmployeeController@generateCard')->name('employee.generateCard');
-Route::get('/employee/{employee}/showTimesheet','EmployeeController@showTimesheet')->name('employee.showTimesheet');
