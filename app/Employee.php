@@ -11,7 +11,7 @@ class Employee extends Model
      protected $connection = 'mongodb';
 
      protected $fillable = ['firstname', 'lastname', 'slug', 'active', 'avatar', 'dates', 'job'];
-     //protected $dates = ['created_at', 'updated_at'];
+     protected $dates = ['created_at', 'updated_at'];
 
     public function dates()
     {

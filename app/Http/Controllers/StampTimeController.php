@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Employee;
 use App\Job;
 use App\Date;
-use App\Timestamp;
 
 class StampTimeController extends Controller
 {
@@ -29,11 +28,8 @@ class StampTimeController extends Controller
     			return response()->json(['message'=>'Success', 'employee'=>$employee], 200);
     		}
     		$date = new Date();
-        	$date->name = Carbon::now()->format('Y-m-d');
-	       	$job = Job::find($employee->job->id);
-	        $date->job()->associate($job);
-	        $date->complete = false;
-	        $date->timestamps()->associate(new Timestamp(['time' => Carbon::now()->format('H-i'), 'status'=>'checkin']));
+        	$date->checkin = Carbon::now()->timestamp;
+            $date->checkout = Carbon::now()->timestamp;
 	        $employee->dates()->associate($date);
 	        $employee->save();
 

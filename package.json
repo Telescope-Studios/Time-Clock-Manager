@@ -24,8 +24,11 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@types/moment-duration-format": "^2.2.2",
         "datatables.net-bs4": "^1.10.20",
         "datatables.net-buttons-bs4": "^1.6.1",
+        "moment": "^2.24.0",
+        "moment-duration-format": "^2.3.2",
         "vue-qrcode-reader": "^2.1.1"
     }
 }
