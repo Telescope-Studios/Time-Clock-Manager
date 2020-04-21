@@ -2345,7 +2345,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     myTable: function myTable() {
       $(function () {
-        $('#employee-timesheet-table').DataTable();
+        $('#employee-timesheet-table').DataTable({
+          "order": [[0, "desc"]]
+        });
       });
     },
     getEmployee: function getEmployee() {
@@ -2366,7 +2368,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.msToTime(ms);
     },
     msToTime: function msToTime(duration) {
-      var minutes = Math.ceil(duration / (1000 * 60) % 60),
+      var minutes = Math.floor(duration / (1000 * 60) % 60),
           hours = Math.floor(duration / (1000 * 60 * 60) % 24);
       hours = hours < 10 ? "0" + hours : hours;
       minutes = minutes < 10 ? "0" + minutes : minutes;

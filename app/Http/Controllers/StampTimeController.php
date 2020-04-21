@@ -27,12 +27,22 @@ class StampTimeController extends Controller
     		if($scan){
     			return response()->json(['message'=>'Success', 'employee'=>$employee], 200);
     		}
-    		$date = new Date();
-        	$date->checkin = Carbon::now()->timestamp;
-            $date->checkout = Carbon::now()->timestamp;
-	        $employee->dates()->associate($date);
+            $lastDate = $employee->dates()->last();
+    		if($lastDate != null){
+                if($lastDate->checkout != null){
+                    $date = new Date();
+                    $date->checkin = Carbon::now()->timestamp;
+                    $employee->dates()->associate($date);
+                }else{
+                    $lastDate->checkout = Carbon::now()->timestamp;
+                    $lastDate->save();
+                }
+            }else{
+                $date = new Date();
+                $date->checkin = Carbon::now()->timestamp;
+                $employee->dates()->associate($date);
+            }
 	        $employee->save();
-
 	        return response()->json(['message'=>'Time stamped successfully.', 'employee'=>$employee], 200);
     	}
     }
