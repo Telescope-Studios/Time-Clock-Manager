@@ -56,7 +56,7 @@
                 this.myTable();
             },
             epochToDateTime(epoch){
-            	return moment.unix(epoch).format('dddd MMMM Do YYYY, h:mm:ss a');
+            	return moment.unix(epoch).format('dddd MMMM Do YYYY, h:mm a');
             },
 			calculateTimeDifference(checkin, checkout){
 				if(checkin == null || checkout == null){
@@ -68,7 +68,7 @@
 			},
 			msToTime(duration) {
   				var minutes = Math.floor((duration / (1000 * 60)) % 60),
-    			hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    			hours = Math.floor(duration / (1000 * 60 * 60));
   				hours = (hours < 10) ? "0" + hours : hours;
   				minutes = (minutes < 10) ? "0" + minutes : minutes;
   				return hours + ":" + minutes;
