@@ -9,7 +9,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for="date in employee.dates">
+			<tr v-for="date in employee.dates.slice().reverse()">
 				<td>{{ date.checkin == null ? "Not Checked In" : epochToDateTime(date.checkin) }}</td>
 				<td>{{ date.checkout == null ? "Not Checked Out" : epochToDateTime(date.checkout) }}</td>
 				<td>{{ date.checkin != null && date.checkout != null ? "Completed" : "Pending" }}</td>
@@ -47,7 +47,7 @@
   			},
             myTable(){
                 $(function(){
-                    $('#employee-timesheet-table').DataTable({"order":[[0, "desc"]]});
+                    $('#employee-timesheet-table').DataTable({"ordering":false});
                 });
             },
 

@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container text-center">
-                        <form @submit.prevent="stampTime">
+                        <form v-if="employee.active" @submit.prevent="stampTime">
                             <div class="form-group">
                                 <div class="card text-center">
                                     <img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" v-bind:src="'/images/' + employee.avatar" class="card-img-top rounded-circle mx-auto d-block" alt="">
@@ -22,6 +22,14 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Stamp</button>
+                        </form>
+                        <form v-else>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h4>This employee isn't currently active.</h4>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Scan another</button>
+                            </div>
                         </form>
                     </div>
                 </div>

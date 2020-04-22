@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Carbon;
 use App\Date;
-use App\Timestamp;
 use App\Employee;
 use App\Job;
 use App\User;
@@ -12,8 +10,6 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use Yajra\Datatables\Datatables;
-
 
 class EmployeeController extends Controller
 {
@@ -61,27 +57,9 @@ class EmployeeController extends Controller
         $employee->lastname = $request->input('lastname');
         $employee->active = $request->input('active') == 'on' ? true : false;
         $employee->slug = $request->input('slug');
+        $employee->job = Job::find($request->input('job'));
         $employee->push();
-        $employee->job()->associate(Job::find($request->input('job')));
-        $employee->save();
 
-        /*$user = new User();
-        $user->name = 'Admin';
-        $user->email = 'admin@gmail.com';
-        $user->password = bcrypt('qwerty');
-        $user->push();
-        $user->roles()->associate(Role::find('5e9580891bb431092867b6f3'));
-        $user->save();*/
-
-
-        /*$date = new Date();
-        $date->name = Carbon::now()->format('Y-m-d');
-        $job = Job::find($employee->job);
-        $date->job()->associate($job);
-        $date->complete = false;
-        $date->timestamps()->associate(new Timestamp(['time' => Carbon::now()->format('H-i'), 'status'=>'checkin']));
-        $employee->dates()->associate($date);
-        $employee->save();*/
         return redirect()->route('employee.index')->with('status', 'The profile has been created successfully.');
     }
 
@@ -125,9 +103,6 @@ class EmployeeController extends Controller
             'lastname'=>'required|alpha_spaces',
             'slug'=>'required|unique:employee_collection,slug,'.$employee->id.',_id'
         ]);
-        //return $employee->id;
-        //Todo: This is not validating properly
-        $employee->active = $request->input('active') == 'on';
         $old_avatar = $employee->avatar;
         $employee->update($request->all());
         if($request->hasFile('avatar')){
@@ -138,6 +113,7 @@ class EmployeeController extends Controller
             $employee->avatar = $name;
             $file->move(public_path().'/images/', $name);
         }
+        $employee->active = $request->input('active') == 'on';
         $employee->job()->associate(Job::find($request->input('job')));
         $employee->save();
         return redirect()->route('employee.index')->with('status', 'The profile has been updated successfully.');
@@ -162,6 +138,12 @@ class EmployeeController extends Controller
     {
         $this->checkAuthorization($request);
         return view('employee.card', compact('employee'));
+    }
+
+    public function getTimestampsBetween(Employee $employee, Request $request){
+        //return Carbon::parse('04/30/2020 4:03 AM')->timestamp;
+        $dates = $employee->dates()->where('checkin', '>=', '1587512936')->where('checkout', '<=', '1587524273');
+        return $dates;
     }
 
     public function checkAuthorization(Request $request){

@@ -29,6 +29,7 @@
         "jquery": "^3.4.1",
         "moment": "^2.24.0",
         "moment-duration-format": "^2.3.2",
+        "tempusdominus-bootstrap-4": "^5.1.2",
         "vue-qrcode-reader": "^2.1.1"
     }
 }

@@ -81,9 +81,10 @@
                 </div>
 
                 <div class="links">
-                    <a href="/employee">Employees</a>
-                    <a href="/job">Jobs</a>
-                    <a href="/stamp">Stamper</a>
+                    <a href="{{ route('employee.index') }}">Employees</a>
+                    <a href="{{ route('job.index') }}">Jobs</a>
+                    <a href="{{ route('report.index') }}">Reports</a>
+                    <a href="{{ route('stamp.index') }}">Stamper</a>
                 </div>
             </div>
         </div>
