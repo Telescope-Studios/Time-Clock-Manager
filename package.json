@@ -13,7 +13,6 @@
         "axios": "^0.19",
         "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
-        "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
         "popper.js": "^1.12",
@@ -27,6 +26,7 @@
         "@types/moment-duration-format": "^2.2.2",
         "datatables.net-bs4": "^1.10.20",
         "datatables.net-buttons-bs4": "^1.6.1",
+        "jquery": "^3.4.1",
         "moment": "^2.24.0",
         "moment-duration-format": "^2.3.2",
         "vue-qrcode-reader": "^2.1.1"
