@@ -29,7 +29,7 @@
 <script>
 	import datatables from 'datatables.net-bs4'
 	import * as moment from 'moment'
-	import 'moment-duration-format';
+	//import 'moment-duration-format';
     export default {
     	props: ['employeejson'],
         mounted() {
