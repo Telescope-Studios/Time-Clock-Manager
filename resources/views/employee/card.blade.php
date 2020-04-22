@@ -15,7 +15,7 @@
 				<div class="card-body">
 					<h4 class="card-title">{{$employee->firstname}} {{$employee->lastname}}</h4>
 					<h5 class="card-text">{{$employee->job->name ?? null}}</h5>
-					{!! QrCode::size(150)->generate($employee->slug); !!}
+					{!! QrCode::size(175)->generate($employee->slug); !!}
 					<h6 class="card-text">{{$employee->slug}}</h6>
 				</div>
 			</div>
