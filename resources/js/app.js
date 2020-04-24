@@ -37,7 +37,7 @@ Vue.component('stamp-employee-component', StampEmployeeComponent);
 Vue.component('employee-table-component', EmployeeTableComponent);
 Vue.component('job-table-component', JobTableComponent);
 Vue.component('report-table-component', ReportTableComponent);
-Vue.component('timesheet-component', TimesheetComponent);
+Vue.component('timesheet-table-component', TimesheetComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

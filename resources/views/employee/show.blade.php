@@ -4,32 +4,29 @@
 
 @section('content')
 	@include('common.success')
-	<div class="d-flex">
-		<div class="card-img-top d-flex align-items-center">
-			<div>
-				<img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" src="/images/{{$employee->avatar}}" class="rounded-circle img-responsive" alt="">
-			</div>
-			<div class="d-block">
+	<div class="d-flex d-flex-sm flex-column">
+		<div class="mr-auto p-2 center-block">
+			<img style="height: 200px; width: 200px; background-color: #EFEFEF; margin: 20px;" src="/images/{{$employee->avatar}}" class="rounded-circle img-responsive float-left" alt="">
+			<div class="float-left mx-auto" style="margin-top: 60px;">
 				<h2 class="card-title">{{$employee->firstname}} {{$employee->lastname}}</h4>
 				<h5 class="card-text">{{$employee->job->name}}</h5>
 				<h6 class="card-text">{{$employee->active == true? 'Active' : 'Inactive'}}</h6>
 			</div>
-			<div class="ml-auto">
-				<div class="dropdown show">
-				  	<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
-
-				  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <a href="{{ route('employee.edit', $employee->slug) }}" class="dropdown-item">Edit</a>
-					    <a href="{{ route('employee.generateCard', $employee->slug) }}" class="dropdown-item">Generate Card</a>
-					    <a class="dropdown-item" data-toggle="modal" data-target="#deleteWarningModal">Delete</a>
-				  	</div>
-				</div>
+		</div>
+		<div class="ml-auto p-2">
+			<div class="dropdown show">
+			  	<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
+			  	<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="dropdownMenuLink">
+				    <a href="{{ route('employee.edit', $employee->slug) }}" class="dropdown-item">Edit</a>
+				    <a href="{{ route('employee.generateCard', $employee->slug) }}" class="dropdown-item">Generate Card</a>
+				    <a class="dropdown-item" data-toggle="modal" data-target="#deleteWarningModal">Delete</a>
+			  	</div>
 			</div>
 		</div>
 	</div>
 	<h1 style="margin-top: 50px;">Timesheet</h1>
 	<div class="table-responsive-sm">
-		<timesheet-component employeejson="{{$employee}}"></timesheet-component>
+		<timesheet-table-component employeejson="{{$employee}}"></timesheet-table-component>
 	</div>
 	<div class="modal fade" id="deleteWarningModal" tabindex="-1" role="dialog" aria-labelledby="deleteWarningModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

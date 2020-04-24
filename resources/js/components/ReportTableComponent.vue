@@ -35,7 +35,6 @@
 </template>
 
 <script>
-    import datatables from 'datatables.net-bs4'
     import * as moment from 'moment'
     export default {
         mounted() {
@@ -50,8 +49,11 @@
         methods:{
 
             myTable(){
+                let datatableConfig = {
+                    responsive: true
+                };
                 $(function(){
-                    $('#report-table').DataTable();
+                    $('#report-table').DataTable(datatableConfig);
                 });
             },
 

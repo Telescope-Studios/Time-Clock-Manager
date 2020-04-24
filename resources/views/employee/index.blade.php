@@ -11,7 +11,7 @@
 		<div class="ml-auto">
 			<div class="dropdown show">
 			  	<a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
-			  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+			  	<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="dropdownMenuLink">
 				    <a href="{{ route('employee.create') }}" class="dropdown-item">Create</a>
 			  	</div>
 			</div>

@@ -71,6 +71,7 @@ class ReportController extends Controller
             $first = null;
             $last = null;
             foreach ($dates as $date) {
+                if($date->checkout == null) continue;//unfinished checkout
                 if($first == null || $first > $date->checkin){
                     $first = $date->checkin;
                 }
@@ -126,6 +127,7 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        $report->delete();
+        return redirect()->route('report.index');
     }
 }

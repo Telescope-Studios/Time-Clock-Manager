@@ -101,7 +101,7 @@ class EmployeeController extends Controller
         $validatedData = $request->validate([
             'firstname'=>'required|alpha_spaces',
             'lastname'=>'required|alpha_spaces',
-            'slug'=>'required|unique:employee_collection,slug,'.$employee->id.',_id'
+            'slug'=>'required|alpha_dash|unique:employee_collection,slug,'.$employee->id.',_id'
         ]);
         $old_avatar = $employee->avatar;
         $employee->update($request->all());
@@ -138,12 +138,6 @@ class EmployeeController extends Controller
     {
         $this->checkAuthorization($request);
         return view('employee.card', compact('employee'));
-    }
-
-    public function getTimestampsBetween(Employee $employee, Request $request){
-        //return Carbon::parse('04/30/2020 4:03 AM')->timestamp;
-        $dates = $employee->dates()->where('checkin', '>=', '1587512936')->where('checkout', '<=', '1587524273');
-        return $dates;
     }
 
     public function checkAuthorization(Request $request){

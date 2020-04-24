@@ -14,9 +14,21 @@ try {
 } catch (e) {}
 
 global.moment = require('moment');
+import 'moment-timezone'
 require('tempusdominus-bootstrap-4');
-import 'moment-timezone';
-import datatables from 'datatables.net-bs4';
+import 'datatables.net-bs4'
+import 'datatables.net-responsive-bs4'
+import 'datatables.net-buttons-bs4'
+window.JSZip = require( "jszip" );
+import pdfMake from 'pdfmake/build/pdfmake'
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+import 'datatables.net-buttons/js/buttons.colVis.js'
+import 'datatables.net-buttons/js/buttons.flash.js'
+import 'datatables.net-buttons/js/buttons.html5.js'
+import 'datatables.net-buttons/js/buttons.print.js'
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Employee;
 use App\Job;
@@ -31,15 +30,15 @@ class StampTimeController extends Controller
     		if($lastDate != null){
                 if($lastDate->checkout != null){
                     $date = new Date();
-                    $date->checkin = Carbon::now()->timestamp;
+                    $date->checkin = $request->input('time');
                     $employee->dates()->associate($date);
                 }else{
-                    $lastDate->checkout = Carbon::now()->timestamp;
+                    $lastDate->checkout = $request->input('time');
                     $lastDate->save();
                 }
             }else{
                 $date = new Date();
-                $date->checkin = Carbon::now()->timestamp;
+                $date->checkin = $request->input('time');
                 $employee->dates()->associate($date);
             }
 	        $employee->save();

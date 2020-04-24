@@ -35,7 +35,6 @@
 </template>
 
 <script>
-    import datatables from 'datatables.net-bs4'
 
     export default {
         mounted() {
@@ -50,8 +49,11 @@
         methods:{
 
             myTable(){
+                let datatableConfig = {
+                    responsive: true
+                };
                 $(function(){
-                    $('#job-table').DataTable();
+                    $('#job-table').DataTable(datatableConfig);
                 });
             },
 

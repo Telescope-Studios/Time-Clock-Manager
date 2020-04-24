@@ -5,7 +5,7 @@
                 <th scope="col">Active</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">Slug</th>
+                <th scope="col">Code</th>
                 <th scope="col">Job</th>
                 <th></th>
             </tr>
@@ -30,7 +30,7 @@
                 <th scope="col">Active</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">Slug</th>
+                <th scope="col">Code</th>
                 <th scope="col">Job</th>
                 <th></th>
             </tr>
@@ -39,7 +39,6 @@
 </template>
 
 <script>
-    import datatables from 'datatables.net-bs4'
     export default {
         props: ['employeesjson'],
         mounted() {
@@ -53,8 +52,11 @@
         },
         methods:{
             myTable(){
+                let datatableConfig = {
+                    responsive: true
+                };
                 $(function(){
-                    $('#employee-table').DataTable();
+                    $('#employee-table').DataTable(datatableConfig);
                 });
             },
 

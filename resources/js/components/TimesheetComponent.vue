@@ -27,8 +27,7 @@
 	</table>
 </template>
 <script>
-	import datatables from 'datatables.net-bs4'
-	import * as moment from 'moment'
+	//import * as moment from 'moment'
 	//import 'moment-duration-format';
     export default {
     	props: ['employeejson'],
@@ -38,7 +37,7 @@
 
         data(){
             return {
-                employee: {}
+                employee: { dates:[]}
             }
         },
         methods:{
@@ -46,8 +45,12 @@
     			return moment();
   			},
             myTable(){
+            	let datatableConfig = {
+                    responsive: true,
+                    "ordering": false
+                };
                 $(function(){
-                    $('#employee-timesheet-table').DataTable({"ordering":false});
+                    $('#employee-timesheet-table').DataTable(datatableConfig);
                 });
             },
 

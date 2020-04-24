@@ -59,7 +59,7 @@
             time: moment().unix()
           })
           .then(function(res){
-            $('#stampEmployee').modal('hide')
+            //$('#stampEmployee').modal('hide')
           })
           .catch(function(err){
             console.log(err)

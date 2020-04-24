@@ -53,7 +53,6 @@ export default {
   },
 
   methods: {
-
     onInit (promise) {
       promise
         .catch((error) =>{

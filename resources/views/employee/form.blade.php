@@ -7,7 +7,7 @@
 		{!! Form::text('lastname', null, ['class' => 'form-control	']) !!}
 </div>
 <div class="form-group"> 
-		{!! Form::label('slug', 'Slug') !!}
+		{!! Form::label('slug', 'Code') !!}
 		{!! Form::text('slug', null, ['class' => 'form-control	']) !!}
 </div>
 <div class="form-group"> 
