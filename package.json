@@ -35,6 +35,6 @@
         "moment-duration-format": "^2.3.2",
         "pdfmake": "^0.1.65",
         "tempusdominus-bootstrap-4": "^5.1.2",
-        "vue-qrcode-reader": "^2.2.0"
+        "vue-qrcode-reader": "^2.1.1"
     }
 }
