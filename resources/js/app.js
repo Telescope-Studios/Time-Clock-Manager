@@ -17,6 +17,7 @@ import EmployeeTableComponent from './components/EmployeeTableComponent.vue'
 import QRScannerComponentFallback from './components/QRScannerComponentFallback.vue'
 import TimesheetComponent from './components/TimesheetComponent.vue'
 import ReportTableComponent from './components/ReportTableComponent.vue'
+import ReportSheetComponent from './components/ReportSheetComponent.vue'
 
 Vue.use(VueQrcodeReader);
 /**
@@ -38,6 +39,7 @@ Vue.component('employee-table-component', EmployeeTableComponent);
 Vue.component('job-table-component', JobTableComponent);
 Vue.component('report-table-component', ReportTableComponent);
 Vue.component('timesheet-table-component', TimesheetComponent);
+Vue.component('report-sheet-component', ReportSheetComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

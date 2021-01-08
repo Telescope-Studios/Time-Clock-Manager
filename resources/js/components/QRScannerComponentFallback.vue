@@ -78,10 +78,10 @@ export default {
 
       // pretend it's taking really long
 
-      axios.post('/stamp',
-        {
-          slug: this.result,
-          scan: true
+      axios.get('/stamp', {
+          params: {
+            slug: this.result,
+          }
         }).then((res) => {
           this.employee = res.data.employee
           EventBus.$emit('employee-stamp', res.data.employee)

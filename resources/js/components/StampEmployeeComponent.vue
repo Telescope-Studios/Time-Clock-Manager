@@ -43,7 +43,7 @@
     export default{
       data(){
         return{
-          employee: {avatar:'', firstname:'', lastname:'', slug:'', job:{name:''}}// this fixes double scan 
+          employee: {active: false, avatar:'', firstname:'', lastname:'', slug:'', job:{name:''}}// this fixes double scan 
         }
       },
       created(){
@@ -55,8 +55,7 @@
         stampTime: function(){
           axios.post('/stamp', {
             slug: this.employee.slug,
-            scan: false,
-            time: moment().unix()
+            time: moment().unix() 
           })
           .then(function(res){
             $('#stampEmployee').modal('hide')

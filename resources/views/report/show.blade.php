@@ -23,39 +23,7 @@
 		</div>
 	</div>	
 	<div class="table-responsive-sm">
-		<table class="table table-striped table-bordered" id="test-table" style="width: 100%">
-        <thead>
-            <tr>
-                <th scope="col">Employee</th>
-                <th scope="col">From</th>
-                <th scope="col">To</th>
-                <th scope="col">Total Hours</th>
-                <th scope="col">Total Payment</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($employeereports as $employeereport)
-            	@if($employeereport->hours >= 0.01)
-	            	<tr>
-		            	<td>{{ $employeereport->employee->firstname }} {{ $employeereport->employee->lastname }}</td>
-		            	<td>{{ $employeereport->from != null ? \Carbon\Carbon::createFromTimestamp($employeereport->from)->isoFormat('dddd MMMM Do YYYY, h:mm A') : 'None'}}</td>
-		            	<td>{{ $employeereport->to != null ? \Carbon\Carbon::createFromTimestamp($employeereport->to)->isoFormat('dddd MMMM Do YYYY, h:mm A') : 'None'}}</td>
-		            	<td>{{number_format((float)$employeereport->hours, 2, '.', '')}}</td>
-		            	<td>${{number_format((float)$employeereport->hours*$employeereport->employee->job->rate, 2, '.', '')}}</td>
-		            </tr>
-	            @endif
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th scope="col">Employee</th>
-                <th scope="col">From</th>
-                <th scope="col">To</th>
-                <th scope="col">Total Hours</th>
-                <th scope="col">Total Payment</th>
-            </tr>
-        </tfoot>
-    </table>
+		<report-sheet-component reportsheetjson="{{ json_encode($employeereports) }}"></report-sheet-component>
 	</div>
 	<div class="modal fade" id="deleteWarningModal" tabindex="-1" role="dialog" aria-labelledby="deleteWarningModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

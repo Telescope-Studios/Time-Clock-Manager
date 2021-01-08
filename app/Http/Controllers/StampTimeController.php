@@ -11,21 +11,41 @@ class StampTimeController extends Controller
 {
     public function index(Request $request){
         $this->checkAuthorization($request);
+
+        if($request->ajax()){
+            $employee_slug = $request->input('slug');
+            if($employee_slug == null){
+                return response()->json(['message'=>'Missing slug param'], 422);
+            }
+            $employee = Employee::where('slug', $employee_slug)->get()->first();
+            if($employee == null){
+                return response()->json(['message'=>'Employee not found.'], 422);
+            }else{
+                return response()->json(['message'=>'Success', 'employee'=>$employee], 200);
+            }
+        }
+
     	return view('stamp.index');
     }
 
     public function store(Request $request){
         $this->checkAuthorization($request);
     	if($request->ajax()){
-    		$scan = $request->input('scan');
+            $employee_slug = $request->input('slug');
+            if($employee_slug == null){
+                return response()->json(['message'=>'Missing slug param'], 422);
+            }
+    		$employee = Employee::where('slug', $employee_slug)->get()->first();
+            $time = $request->input('time');
 
-    		$employee = Employee::where('slug', $request->input('slug'))->get()->first();
-    		if($employee == null){
+            if($employee == null){
     			return response()->json(['message'=>'Employee not found.'], 422);
-    		}
-    		if($scan){
-    			return response()->json(['message'=>'Success', 'employee'=>$employee], 200);
-    		}
+            }
+            if($time == null){
+                return response()->json(['message'=>'Time not found.'], 422);
+            }
+
+            //Todo: redo time check with new format
             $lastDate = $employee->dates()->last();
     		if($lastDate != null){
                 if($lastDate->checkout != null){
