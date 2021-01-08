@@ -15,17 +15,6 @@
         "npm": ">=7.4.0"
     },
     "devDependencies": {
-        "axios": "^0.19",
-        "bootstrap": "^4.5.3",
-        "cross-env": "^7.0.3",
-        "laravel-mix": "^5.0.9",
-        "lodash": "^4.17.20",
-        "popper.js": "^1.12",
-        "resolve-url-loader": "^3.1.2",
-        "sass": "^1.32.0",
-        "sass-loader": "^8.0.0",
-        "vue": "^2.6.12",
-        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
         "@types/moment-duration-format": "^2.2.2",
@@ -39,6 +28,17 @@
         "moment-duration-format": "^2.3.2",
         "pdfmake": "^0.1.65",
         "tempusdominus-bootstrap-4": "^5.1.2",
-        "vue-qrcode-reader": "^2.3.16"
+        "vue-qrcode-reader": "^2.3.16",
+        "axios": "^0.19",
+        "bootstrap": "^4.5.3",
+        "cross-env": "^7.0.3",
+        "laravel-mix": "^5.0.9",
+        "lodash": "^4.17.20",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.32.0",
+        "sass-loader": "^8.0.0",
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
     }
 }
