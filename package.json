@@ -10,6 +10,10 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
+    "engines": {
+        "node": ">=15.5.0",
+        "npm": ">=7.4.0"
+    },
     "devDependencies": {
         "axios": "^0.19",
         "bootstrap": "^4.5.3",
