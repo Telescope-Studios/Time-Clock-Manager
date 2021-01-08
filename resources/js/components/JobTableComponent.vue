@@ -4,7 +4,6 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Rate</th>
                 <th></th>
             </tr>
         </thead>
@@ -12,7 +11,6 @@
             <tr v-for="job in jobs">
                 <td>{{ job.name }}</td>
                 <td>{{ job.description}}</td>
-                <td>${{ Number(job.rate).toFixed(2).toLocaleString() }}</td>
                 <th scope="row">
                     <a v-bind:href="'/job/' + job._id" title="View" data-toggle="tooltip"><!---View-->
                         <i class="far fa-eye"></i>
@@ -27,7 +25,6 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Rate</th>
                 <th></th>
             </tr>
         </tfoot>

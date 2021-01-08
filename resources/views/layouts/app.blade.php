@@ -33,18 +33,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('employee.index') }}">Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('job.index') }}">Jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('report.index') }}">Reports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('stamp.index') }}">Stamper</a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('employee.index') }}">Employees</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('job.index') }}">Jobs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('report.index') }}">Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('stamp.index') }}">Stamper</a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

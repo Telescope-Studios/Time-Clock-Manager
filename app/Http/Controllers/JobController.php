@@ -43,7 +43,6 @@ class JobController extends Controller
         $job = new Job();
         $job->name = $request->input('name');
         $job->description = $request->input('description');
-        $job->rate = floatval($request->input('rate'));
         $job->push();
         return redirect()->route('job.index')->with('status', 'The job has been created successfully.');
     }

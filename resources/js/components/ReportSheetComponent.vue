@@ -4,21 +4,18 @@
             <tr>
                 <th scope="col">Employee</th>
                 <th scope="col">Total Hours</th>
-                <th scope="col">Total Payment</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="report in reportsheet.slice().reverse()">
                 <td>{{ report.employee.firstname }} {{ report.employee.lastname }}</td>
                 <td>{{ roundTo2Decimals(report.hours) }}</td>
-                <td>${{ roundTo2Decimals(report.hours * report.employee.job.rate) }}</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
                 <th scope="col">Employee</th>
                 <th scope="col">Total Hours</th>
-                <th scope="col">Total Payment</th>
             </tr>
         </tfoot>
     </table>

@@ -10,7 +10,7 @@ class Job extends Model
      //protected $primaryKey = 'id';
     protected $connection = 'mongodb';
 
-    protected $fillable = ['name', 'description', 'rate'];
+    protected $fillable = ['name', 'description'];
 
     public function date()
     {
